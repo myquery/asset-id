@@ -28,10 +28,11 @@ export default function Home() {
 
     try {
       // Upload deed to IPFS
-      const deedUrl = await uploadToIPFS(realEstateDetails.deed);
+      const { deed, ...metadataWithoutDeed } = realEstateDetails;
+      const deedUrl = await uploadToIPFS(realEstateDetails.deed, metadataWithoutDeed);
       
       if (deedUrl) {
-        setUploadStatus(`Deed uploaded successfully: ${deedUrl}`);
+        setUploadStatus(`Deed uploaded successfully: ${JSON.stringify(deedUrl)}`);
         console.log('Deed uploaded to IPFS:', deedUrl);
       } else {
         setUploadStatus('Failed to upload deed');
