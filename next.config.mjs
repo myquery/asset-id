@@ -13,6 +13,11 @@ const nextConfig = {
           buffer: require.resolve('buffer'),
           // Add other fallbacks as necessary
         };
+        config.plugins.push(
+            new config.webpack.ProvidePlugin({
+                Buffer: ['buffer', 'Buffer'],
+            })
+        );
         return config;
       },
 };
