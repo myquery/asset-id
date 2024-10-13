@@ -1,8 +1,11 @@
 import fetch from 'node-fetch';
+import { Buffer } from 'buffer';
 import {create} from "ipfs-http-client"
 
 const projectKey = process.env.NEXT_PUBLIC_API_KEY;
 const projectSecret = process.env.NEXT_PUBLIC_API_SECRET;
+
+const base64String = btoa(`${projectKey}:${projectSecret}`);
 
 
 const client = create({
@@ -10,7 +13,7 @@ const client = create({
     port: 5001,
     protocol: "https",
     headers: {
-        authorization: 'Basic ' + Buffer.from(`${projectKey}:${projectSecret}`).toString('base64')
+        authorization: 'Basic ' + Buffer.from(base64String, 'base64')
     },
     fetch: fetch
 })
