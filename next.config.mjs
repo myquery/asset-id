@@ -1,5 +1,6 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
+import webpack from 'webpack'; // Import Webpack directly
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -14,13 +15,13 @@ const nextConfig = {
       buffer: require.resolve('buffer'),
     };
 
-    // Ensure ProvidePlugin is used correctly
+    // Add Webpack plugins
     config.plugins.push(
-      new config.webpack.DefinePlugin({
+      new webpack.DefinePlugin({
         'process.env.NEXT_PUBLIC_API_KEY': JSON.stringify(process.env.NEXT_PUBLIC_API_KEY),
         'process.env.NEXT_PUBLIC_API_SECRET': JSON.stringify(process.env.NEXT_PUBLIC_API_SECRET),
       }),
-      new (require('webpack').ProvidePlugin)({
+      new webpack.ProvidePlugin({
         Buffer: ['buffer', 'Buffer'],
       })
     );
