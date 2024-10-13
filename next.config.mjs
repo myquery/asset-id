@@ -1,4 +1,7 @@
-/** @type {import('next').NextConfig} */
+// next.config.mjs
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 const nextConfig = {
     reactStrictMode: true,
     env: {
@@ -7,8 +10,8 @@ const nextConfig = {
     },
     webpack: (config) => {
         config.resolve.fallback = {
-          buffer: require.resolve("buffer"),
-          // You can add more modules here if needed
+          buffer: require.resolve('buffer'),
+          // Add other fallbacks as necessary
         };
         return config;
       },
