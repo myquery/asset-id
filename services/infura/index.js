@@ -9,7 +9,7 @@ const client = create({
     port: 5001,
     protocol: "https",
     headers: {
-        authorization: 'Basic ' + Buffer.from(`${projectKey}:${projectSecret}`).toString('base64')
+        authorization: 'Basic ' + btoa(`${projectKey}:${projectSecret}`)
     }
 })
 
